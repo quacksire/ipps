@@ -1,5 +1,4 @@
 var express = require('express');
-var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const moment = require("moment");
@@ -104,6 +103,12 @@ app.get('/main.xml', function(req, res, next) {
                 <MenuItem>
                 <Name>BART</Name>
                 <URL>http://${ req.hostname }:${3000}/bart.xml
+                </URL>
+                <IconIndex>1</IconIndex>
+                </MenuItem>
+                <MenuItem>
+                <Name>Poop</Name>
+                <URL>http://${ req.hostname }:${3000}/stinkypoopoohead.xml
                 </URL>
                 <IconIndex>1</IconIndex>
                 </MenuItem>
@@ -340,5 +345,21 @@ app.get('/bart/:id.xml', async function(req, res, next) {
 
 
 })
+
+// create a route ("/stinkypoopoohead.xml") that returns XML of the CiscoIPPhoneImageFile of a URL
+app.get('/stinkypoopoohead.xml', function(req, res, next) {
+        // send XML back
+        res.set('Content-Type', 'text/xml');
+        res.send(`
+            <CiscoIPPhoneImageFile>
+              <Title>Stinky Poopoo Head</Title>
+              <Prompt>Stinky Poopoo Head</Prompt>
+              <LocationX>0</LocationX>
+              <LocationY>0</LocationY>
+              <URL>https://i.imgur.com/nD0mZUQ.png</URL>
+            </CiscoIPPhoneImageFile>
+        `);
+})
+
 
 module.exports = app;
