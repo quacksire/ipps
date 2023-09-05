@@ -309,17 +309,17 @@ app.get('/bart/:id.xml', async function(req, res, next) {
 
                 // make sure line string is always 7 chars long
                 let line = `${String(etd.MonitoredVehicleJourney.LineRef).split("-")[0]} Line`
-                if (line.length < 12) {
-                        line = line.padEnd(12, ' ')
+                if (line.length < 7) {
+                        line += ' '.repeat(7 - line.length)
                 }
 
                 // make sure destination string is always 20 chars long
                 let destination = String(etd.MonitoredVehicleJourney.DestinationName).split('/')[0]
                 if (destination.length < 15) {
-                        destination = destination.padEnd(15, ' ')
+                        destination += ' '.repeat(15 - destination.length)
                 }
 
-                return `${line} ${destination} - ${eta}`
+                return `${line}${destination} - ${eta}`
 
 
         })
