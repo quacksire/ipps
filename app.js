@@ -232,7 +232,9 @@ app.get('/caltrain/:id.xml', async function(req, res, next) {
 
         let etdText = ETDs.map((etd) => {
                 let eta = moment(new Date(Date.parse(etd.MonitoredVehicleJourney.MonitoredCall.ExpectedArrivalTime))).fromNow()
-
+                if (eta.includes('ago')) {
+                        return
+                }
                 return `${etd.MonitoredVehicleJourney.FramedVehicleJourneyRef.DatedVehicleJourneyRef} (${etd.MonitoredVehicleJourney.LineRef}) - ${eta} (${String(new Date(Date.parse(etd.MonitoredVehicleJourney.MonitoredCall.ExpectedArrivalTime)).toLocaleTimeString('en-US', { timeZone: 'America/Los_Angeles' })).replace()})`
         })
         ETDs.forEach((etd) => {
