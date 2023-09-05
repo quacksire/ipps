@@ -7,7 +7,7 @@ services:
       - ./app:/app
     ports:
       - "3000:3000"
-    command: ["npm", "start"]
+    command: ["sh", "-c", "npm install && npm start"]
     environment:
       - NODE_ENV=production
     restart: always
@@ -18,29 +18,5 @@ services:
     image: alpine/git
     volumes:
       - ./app:/app
-    command: ["git", "clone", "https://github.com/quacksire/ipps", "."]
+    command: ["git", "clone", "https://github.com/quacksire/ipps.git", "."]
     restart: "no"
-    depends_on:
-      - wait-for-git
-
-  wait-for-git:
-    image: alpine:latest
-    command: ["sh", "-c", "while [ ! -d /app/.git ]; do sleep 1; done"]
-    depends_on:
-      - node-app
-
-  install-packages:
-    image: node:14 # You can use any Node.js version you prefer
-    working_dir: /app
-    volumes:
-      - ./app:/app
-    command: ["npm", "install"]
-    restart: "no"
-    depends_on:
-      - github-clone
-
-  wait-for-node:
-    image: alpine:latest
-    command: ["sh", "-c", "while ! nc -z node-app 3000; do sleep 1; done"]
-    depends_on:
-      - install-packages
