@@ -106,12 +106,6 @@ app.get('/main.xml', function(req, res, next) {
                 </URL>
                 <IconIndex>1</IconIndex>
                 </MenuItem>
-                <MenuItem>
-                <Name>Poop</Name>
-                <URL>http://${ req.hostname }:${3000}/stinkypoopoohead.xml
-                </URL>
-                <IconIndex>1</IconIndex>
-                </MenuItem>
             </CiscoIPPhoneMenu>
         `);
 });
