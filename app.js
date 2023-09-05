@@ -306,7 +306,20 @@ app.get('/bart/:id.xml', async function(req, res, next) {
         let etdText = ETDs.map((etd) => {
                 let eta = moment(new Date(Date.parse(etd.MonitoredVehicleJourney.MonitoredCall.ExpectedArrivalTime))).fromNow()
 
-                return `${String(etd.MonitoredVehicleJourney.LineRef).split("-")[0]} Line to ${String(etd.MonitoredVehicleJourney.DestinationName).split('/')[0]} - ${eta}`
+
+                // make sure line string is always 7 chars long
+                let line = String(etd.MonitoredVehicleJourney.LineRef).split("-")[0]
+                if (line.length < 7) {
+                        line = line.padEnd(7, ' ')
+                }
+
+                // make sure destination string is always 20 chars long
+                let destination = String(etd.MonitoredVehicleJourney.DestinationName).split('/')[0]
+                if (destination.length < 20) {
+                        destination = destination.padEnd(20, ' ')
+                }
+
+                return `${line} Line to ${destination} - ${eta}`
 
 
         })
