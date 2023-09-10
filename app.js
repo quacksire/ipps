@@ -365,7 +365,7 @@ app.get('/stinkypoopoohead.xml', function(req, res, next) {
               <Prompt>Stinky Poopoo Head</Prompt>
               <LocationX>0</LocationX>
               <LocationY>0</LocationY>
-              <URL>https://i.imgur.com/nD0mZUQ.png</URL>
+              <URL>http://i.imgur.com/nD0mZUQ.png</URL>
             </CiscoIPPhoneImageFile>
         `);
 })
