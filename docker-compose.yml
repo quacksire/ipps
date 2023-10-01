@@ -1,7 +1,7 @@
 version: '3'
 services:
   node-app:
-    image: node:14 # You can use any Node.js version you prefer
+    image: node:18-alpine3.18 # You can use any Node.js version you prefer
     working_dir: /app
     volumes:
       - ./app:/app
