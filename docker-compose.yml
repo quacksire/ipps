@@ -5,7 +5,7 @@ services:
     image: node:18-alpine3.18 # You can use any Node.js version you prefer
     working_dir: /app
     volumes:
-      - ./app:/app
+      - /ipps:/ipps
     ports:
       - "3000:3000"
     command: ["sh", "-c", "npm install && npm start"]
@@ -19,7 +19,7 @@ services:
   github-clone:
     image: alpine/git
     volumes:
-      - ./app:/app
+      - /ipps:/ipps
     command: ["clone", "https://github.com/quacksire/ipps.git", "."]
     restart: "no"
     dns: 1.1.1.1
