@@ -1,4 +1,5 @@
 version: '3'
+
 services:
   node-app:
     image: node:18-alpine3.18 # You can use any Node.js version you prefer
@@ -13,10 +14,12 @@ services:
     restart: always
     depends_on:
       - github-clone
+    dns: 1.1.1.1
 
   github-clone:
     image: alpine/git
     volumes:
       - ./app:/app
-    command: ["git", "clone", "https://github.com/quacksire/ipps.git", "."]
+    command: ["clone", "https://github.com/quacksire/ipps.git", "."]
     restart: "no"
+    dns: 1.1.1.1
